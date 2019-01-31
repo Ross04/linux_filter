@@ -4,13 +4,14 @@
 
 int main () {
     char command[100];
-    char ip[20];
+    char ip[25];
     char novarcmd[100];
     char novarcmd0[100];
     char novarcmd1[100];
 
-    printf("Welcome to Linux_filter.  Please enter proxy ip address and port in this format: xxx.xxx.xxx.xxx:XXXX:\n");
+    printf("Welcome to Linux_filter.  Please enter proxy ip address and port in this format: xxx.xxx.xxx.xxx:XXXX:");
     scanf(" %s", ip);
+    printf("\n");
 
     strcpy( command, "sudo iptables -F" );
     system(command);
