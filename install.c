@@ -13,17 +13,17 @@ int main () {
     scanf(" %s", ip);
     printf("\n");
 
-    strcpy( command, "sudo iptables -F" );
+    strcpy( command, "iptables -t nat -F" );
     system(command);
-    strcpy( command, "sudo echo '1' > /proc/sys/net/ipv4/ip_forward" );
+    strcpy( command, "echo '1' > /proc/sys/net/ipv4/ip_forward" );
     system(command);
-    strcpy( novarcmd, "sudo iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination " );
+    strcpy( novarcmd, "iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination " );
     strcpy( command, strcat( novarcmd, ip ));
     system(command);
-    strcpy( novarcmd0, "sudo iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination " );
+    strcpy( novarcmd0, "iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination " );
     strcpy( command, strcat( novarcmd0, ip ));
     system(command);
-    strcpy( novarcmd1, "sudo iptables -t nat -A OUTPUT -p udp --dport 443 -j DNAT --to-destination " );
+    strcpy( novarcmd1, "iptables -t nat -A OUTPUT -p udp --dport 443 -j DNAT --to-destination " );
     strcpy( command, strcat( novarcmd1, ip ));
     system(command);
 
