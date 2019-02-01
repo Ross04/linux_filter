@@ -8,8 +8,8 @@ all: $(TARGET).c
 	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
 
 .PHONY: install
-install: install
-	cp install /usr/local/bin/install
+install: $(TARGET)
+	install -m700 $(TARGET) /usr/local/bin
 
 .PHONY: uninstall
 unistall:
