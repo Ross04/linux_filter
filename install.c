@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int main () {
     char command[100];
@@ -9,9 +10,20 @@ int main () {
     char novarcmd0[100];
     char novarcmd1[100];
 
-    printf("Welcome to Linux_filter.  Please enter proxy ip address and port in this format: xxx.xxx.xxx.xxx:XXXX:");
-    scanf(" %s", ip);
-    printf("\n");
+    FILE *fp;
+
+    if ( access ( "/usr/local/bin/.filterdata", F_OK ) != -1 ) {
+	fp = fopen("/usr/local/bin/.filterdata", "r");
+	fgets(ip, 25, (FILE*)fp);
+	fclose(fp);
+    } else {
+	printf("Welcome to Linux_filter.  Please enter proxy ip address and port in this format: xxx.xxx.xxx.xxx:XXXX:");
+	scanf(" %s", ip);
+	printf("\n");
+	fp = fopen("/usr/local/bin/.filterdata", "w+");
+	fprintf(fp, "%s\n", ip);
+	fclose(fp);
+    }
 
     strcpy( command, "iptables -t nat -F" );
     system(command);
